@@ -8,11 +8,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.example.appfilmes.ui.components.ButtonBase
 import com.example.appfilmes.ui.components.ButtonFacebook
 import com.example.appfilmes.ui.components.ButtonGoogle
@@ -21,10 +21,11 @@ import com.example.appfilmes.ui.components.TextBase
 import com.example.appfilmes.ui.components.TextButtonBase
 import com.example.appfilmes.ui.components.TextFieldEmail
 import com.example.appfilmes.ui.components.TextFieldSenha
+import com.example.appfilmes.ui.navigation.Routes
 import com.example.appfilmes.viewModel.LoginViewModel
 
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel) {
+fun LoginScreen(loginViewModel: LoginViewModel, navController: NavHostController) {
     Row(
         horizontalArrangement = Arrangement.Center
     ) {
@@ -62,7 +63,7 @@ fun LoginScreen(loginViewModel: LoginViewModel) {
                     TextButtonBase("Esqueceu a senha?", onClick = {})
                 }
 
-                ButtonBase("Entrar", onClick = {})
+                ButtonBase("Entrar", onClick = { navController.navigate(Routes.HOME) })
 
                 Row(
                     modifier = Modifier

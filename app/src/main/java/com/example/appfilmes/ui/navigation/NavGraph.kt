@@ -1,5 +1,6 @@
 package com.example.appfilmes.ui.navigation
 
+import HomeScreen
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -14,8 +15,10 @@ fun NavGraph(loginViewModel: LoginViewModel, navController: NavHostController){
         startDestination = Routes.LOGIN
     ){
         composable(Routes.LOGIN) {
-            LoginScreen(loginViewModel)
+            LoginScreen(loginViewModel, navController)
+        }
+        composable(Routes.LOGIN) {
+            HomeScreen()
         }
     }
-
 }
