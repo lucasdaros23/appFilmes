@@ -1,4 +1,5 @@
 package com.example.appfilmes.ui.navigation
 
 object Routes {
+    const val LOGIN = "login"
 }
