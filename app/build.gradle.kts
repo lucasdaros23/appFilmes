@@ -1,3 +1,5 @@
+import java.lang.module.ModuleFinder.compose
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -50,6 +52,9 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.ads.mobile.sdk)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation(libs.androidx.espresso.core)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
