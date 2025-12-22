@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -19,7 +20,8 @@ fun IconBase(
     Icon(
         painter = painter,
         contentDescription = contentDescription,
-        Modifier.size(25.dp)
+        Modifier.size(25.dp),
+        tint = Color(0xffB3B3B3)
     )
 }
 
@@ -46,4 +48,19 @@ fun IconEye(loginViewModel: LoginViewModel){
             if (loginViewModel.uiState.mostrarSenha) R.drawable.openeye else R.drawable.closeeye),
         "olho"
     )
+}
+
+@Composable
+fun IconGoogle(){
+    IconBase(
+        painterResource(R.drawable.google),
+        "google",
+    )
+}
+
+@Composable
+fun IconFacebook(){
+    IconBase(
+    painterResource(R.drawable.facebook),
+    "facebook")
 }

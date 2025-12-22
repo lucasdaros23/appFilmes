@@ -45,7 +45,7 @@ fun TextFieldBase(
             focusedIndicatorColor = Color(0xff3C3C3C),
             unfocusedIndicatorColor = Color(0xff3C3C3C)
         ),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(15.dp),
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon
     )
