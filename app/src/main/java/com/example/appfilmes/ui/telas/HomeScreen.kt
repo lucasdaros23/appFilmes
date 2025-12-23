@@ -38,13 +38,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.appfilmes.R
 import com.example.appfilmes.ui.components.Filme
 import com.example.appfilmes.ui.components.FilmeCard
+import com.example.appfilmes.ui.containers.BottomBar
+import com.example.appfilmes.ui.navigation.Routes
 import com.example.appfilmes.ui.theme.AppFilmesTheme
+import com.example.appfilmes.viewModel.RodapeViewModel
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController, rodapeViewModel: RodapeViewModel) {
     val filmes = listOf(
         Filme(
             "A Queda do Império",
@@ -106,7 +111,7 @@ fun HomeScreen() {
             item { Spacer(Modifier.height(20.dp)) }
         }
 
-        BottomBar()
+        BottomBar(navController, rodapeViewModel)
     }
 }
 
@@ -155,44 +160,14 @@ fun TopBar() {
     }
 }
 
-@Composable
-fun BottomBar(modifier: Modifier = Modifier) {
-    var itemSelecionado by remember { mutableStateOf(0) }
-    NavigationBar(
-        containerColor = Color(0xFF111111)
-    ) {
-        val items = listOf("Inicio", "Filmes", "Perfil")
-        val icons = listOf(
-            Icons.Filled.Home, Icons.Filled.Search, Icons.Filled.Person
-        )
 
-        // ✅ Corrige o loop para incluir o índice e o item corretamente
-        items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                selected = itemSelecionado == index,
-                onClick = { itemSelecionado = index },
-                icon = {
-                    Icon(
-                        imageVector = icons[index], contentDescription = item
-                    )
-                },
-                label = { Text(item) },
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = Color(0xFF3B49DF),
-                    selectedTextColor = Color(0xFF3B49DF),
-                    unselectedIconColor = Color.White,
-                    unselectedTextColor = Color.White,
-                    indicatorColor = Color.Transparent
-                )
-            )
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(modifier: Modifier = Modifier) {
     AppFilmesTheme() {
-        HomeScreen()
+        val navController = rememberNavController()
+        val rodapeViewModel = RodapeViewModel()
+        HomeScreen(navController, rodapeViewModel)
     }
 }

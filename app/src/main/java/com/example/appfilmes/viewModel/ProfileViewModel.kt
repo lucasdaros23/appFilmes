@@ -27,14 +27,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.test.espresso.base.Default
-import com.example.appfilmes.FilmaAvaliado
-import com.example.appfilmes.R
-import com.example.appfilmes.Usuario
+import androidx.navigation.compose.rememberNavController
+import com.example.appfilmes.model.FilmaAvaliado
+import com.example.appfilmes.model.Usuario
 import com.example.appfilmes.ui.telas.ProfileScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import org.checkerframework.framework.qual.PreconditionAnnotation
 
 
 class ProfileViewModel : ViewModel() {
@@ -84,7 +82,9 @@ fun ProfileScreenView(viewModel: ProfileViewModel = viewModel()){
             )
         }
 
-        ProfileScreen(name = usuario.nome)
+        val navController = rememberNavController()
+        val rodapeViewModel = RodapeViewModel()
+        ProfileScreen(name = usuario.nome, navController, rodapeViewModel)
 
 
         Text(

@@ -10,7 +10,6 @@ class LoginViewModel : ViewModel(){
     var uiState by mutableStateOf(LoginUiState())
         private set
 
-
     fun onEmailChange(novoEmail: String){
         uiState = uiState.copy(
             email = novoEmail
