@@ -6,12 +6,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.appfilmes.ui.telas.LoginScreen
-import com.example.appfilmes.ui.telas.ProfileScreen
+import com.example.appfilmes.ui.telas.ProfileScreenView
 import com.example.appfilmes.viewModel.LoginViewModel
+import com.example.appfilmes.viewModel.ProfileViewModel
 import com.example.appfilmes.viewModel.RodapeViewModel
 
 @Composable
-fun NavGraph(loginViewModel: LoginViewModel, navController: NavHostController, rodapeViewModel: RodapeViewModel){
+fun NavGraph(loginViewModel: LoginViewModel, navController: NavHostController, rodapeViewModel: RodapeViewModel, profileViewModel: ProfileViewModel){
     NavHost(
         navController = navController,
         startDestination = Routes.LOGIN
@@ -23,7 +24,7 @@ fun NavGraph(loginViewModel: LoginViewModel, navController: NavHostController, r
             HomeScreen(navController, rodapeViewModel)
         }
         composable(Routes.PERFIL) {
-            ProfileScreen("lucas", navController, rodapeViewModel)
+            ProfileScreenView(profileViewModel, navController, rodapeViewModel)
         }
     }
 }

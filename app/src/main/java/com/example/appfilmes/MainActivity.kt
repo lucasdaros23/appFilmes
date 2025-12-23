@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.appfilmes.ui.navigation.NavGraph
 import com.example.appfilmes.ui.theme.AppFilmesTheme
 import com.example.appfilmes.viewModel.LoginViewModel
+import com.example.appfilmes.viewModel.ProfileViewModel
 import com.example.appfilmes.viewModel.RodapeViewModel
 
 class MainActivity : ComponentActivity() {
@@ -26,8 +27,9 @@ class MainActivity : ComponentActivity() {
                 val loginViewModel = LoginViewModel()
                 val navController = rememberNavController()
                 val rodapeViewModel = RodapeViewModel()
+                val profileViewModel = ProfileViewModel()
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-                    NavGraph(loginViewModel, navController, rodapeViewModel)
+                    NavGraph(loginViewModel, navController, rodapeViewModel, profileViewModel)
                 }
             }
         }
