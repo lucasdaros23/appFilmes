@@ -7,8 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -25,7 +28,7 @@ import com.example.appfilmes.ui.navigation.Routes
 import com.example.appfilmes.viewModel.LoginViewModel
 
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel, navController: NavHostController) {
+fun LoginScreen(handler: LoginViewModel, navController: NavHostController) {
     Row(
         horizontalArrangement = Arrangement.Center
     ) {
@@ -44,21 +47,18 @@ fun LoginScreen(loginViewModel: LoginViewModel, navController: NavHostController
                 Box(
                     Modifier.padding(80.dp)
                 ) {
-                    ImageMovie()
+                    ImageMovie(200)
                 }
 
-                TextFieldEmail(
-                    email = loginViewModel.uiState.email,
-                    onValueChange = { email -> loginViewModel.onEmailChange(email) }
-                )
-                TextFieldSenha(
-                    senha = loginViewModel.uiState.senha,
-                    onValueChange = { senha -> loginViewModel.onSenhaChange(senha) },
-                    loginViewModel
-                )
+                TextFieldEmail(handler)
+                TextFieldSenha(handler)
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.End
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 10.dp)
+                    ,
+                    horizontalArrangement = Arrangement.End,
+
                 ) {
                     TextButtonBase("Esqueceu a senha?", onClick = {})
                 }
@@ -69,9 +69,25 @@ fun LoginScreen(loginViewModel: LoginViewModel, navController: NavHostController
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 16.dp),
-                    horizontalArrangement = Arrangement.Center
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+
                 ){
+                    Divider(
+                        Modifier
+                            .weight(1f)
+                            .padding(end = 10.dp)
+                            .height(1.dp),
+                        color = Color(0xff3C3C3C)
+                    )
                     TextBase("Ou entre com")
+                    Divider(
+                        Modifier
+                            .weight(1f)
+                            .padding(start = 10.dp)
+                            .height(1.dp),
+                        color = Color(0xff3C3C3C)
+                    )
                 }
 
                 Row(
@@ -90,7 +106,7 @@ fun LoginScreen(loginViewModel: LoginViewModel, navController: NavHostController
                     horizontalArrangement = Arrangement.Center
                 ) {
                     TextBase("Não tem uma conta? ")
-                    TextButtonBase("Criar uma conta", onClick = { })
+                    TextButtonBase("Criar uma conta", onClick = { navController.navigate(Routes.CADASTRO)})
                 }
 
 
@@ -98,3 +114,5 @@ fun LoginScreen(loginViewModel: LoginViewModel, navController: NavHostController
         }
     }
 }
+
+

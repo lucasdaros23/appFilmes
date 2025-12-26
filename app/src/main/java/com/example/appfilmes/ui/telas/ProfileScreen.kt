@@ -2,7 +2,6 @@ package com.example.appfilmes.ui.telas
 
 import TopBar
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,7 +28,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,8 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.appfilmes.R
-import com.example.appfilmes.model.FilmaAvaliado
+import com.example.appfilmes.data.model.FilmaAvaliado
 import com.example.appfilmes.ui.containers.BottomBar
 import com.example.appfilmes.viewModel.ProfileViewModel
 import com.example.appfilmes.viewModel.RodapeViewModel

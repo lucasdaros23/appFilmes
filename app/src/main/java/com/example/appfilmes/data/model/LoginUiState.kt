@@ -1,4 +1,4 @@
-package com.example.appfilmes.model
+package com.example.appfilmes.data.model
 
 data class LoginUiState(
     val email: String = "",

@@ -4,7 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.appfilmes.model.RodapeUiState
+import com.example.appfilmes.data.model.RodapeUiState
 
 class RodapeViewModel :  ViewModel(){
 

@@ -14,7 +14,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import com.example.appfilmes.viewModel.CadastroViewModel
 import com.example.appfilmes.viewModel.LoginViewModel
+import com.example.appfilmes.viewModel.contract.EmailHandler
+import com.example.appfilmes.viewModel.contract.SenhaHandler
 
 
 @Composable
@@ -52,11 +55,11 @@ fun TextFieldBase(
 }
 
 @Composable
-fun TextFieldEmail(email: String, onValueChange: (String) -> Unit) {
+fun TextFieldEmail(handler: EmailHandler) {
     Row() {
         TextFieldBase(
-            value = email,
-            onValueChange = { onValueChange(it) },
+            value = handler.email,
+            onValueChange = handler::onEmailChange,
             placeholder = "Seu email",
             visualTransformation = VisualTransformation.None,
             leadingIcon = {
@@ -67,16 +70,42 @@ fun TextFieldEmail(email: String, onValueChange: (String) -> Unit) {
 }
 
 @Composable
-fun TextFieldSenha(senha: String, onValueChange: (String) -> Unit, loginViewModel: LoginViewModel) {
+fun TextFieldSenha(handler: SenhaHandler) {
     TextFieldBase(
-        senha,
-        onValueChange = { onValueChange(it) },
+        handler.senha,
+        onValueChange = handler::onSenhaChange,
         placeholder = "Sua senha",
-        visualTransformation = if (loginViewModel.uiState.mostrarSenha) VisualTransformation.None else PasswordVisualTransformation(),
+        visualTransformation = if (handler.mostrarSenha) VisualTransformation.None else PasswordVisualTransformation(),
         leadingIcon = { IconLock() },
         trailingIcon = {
-            IconButton(onClick = { loginViewModel.onOlhoChange() }) {
-                IconEye(loginViewModel)
+            IconButton(onClick = { handler.onOlhoChange() }) {
+                IconEye(handler)
+            }
+        }
+    )
+}
+
+@Composable
+fun TextFieldNome(viewModel: CadastroViewModel) {
+    TextFieldBase(
+        value = viewModel.uiState.nome,
+        onValueChange = { viewModel.onNomeChange(it) },
+        placeholder = "Seu nome",
+        visualTransformation = VisualTransformation.None
+    )
+}
+
+@Composable
+fun TextFieldSenhaConfirm(viewModel: CadastroViewModel) {
+    TextFieldBase(
+        value = viewModel.uiState.senhaConfirm,
+        onValueChange = { viewModel.onSenhaConfirmChange(it) },
+        placeholder = "Confirme sua senha",
+        visualTransformation = if (viewModel.uiState.mostrarSenhaConfirm) VisualTransformation.None else PasswordVisualTransformation(),
+        leadingIcon = { IconLock() },
+        trailingIcon = {
+            IconButton(onClick = { viewModel.onOlhoConfirmChange() }) {
+                IconEyeConfirm(viewModel)
             }
         }
     )

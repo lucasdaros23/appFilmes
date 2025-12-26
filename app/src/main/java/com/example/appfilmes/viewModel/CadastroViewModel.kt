@@ -4,12 +4,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.appfilmes.data.model.LoginUiState
+import com.example.appfilmes.data.model.CadastroUiState
 import com.example.appfilmes.viewModel.contract.EmailHandler
 import com.example.appfilmes.viewModel.contract.SenhaHandler
 
-class LoginViewModel : ViewModel(), SenhaHandler, EmailHandler{
-    var uiState by mutableStateOf(LoginUiState())
+class CadastroViewModel : ViewModel(), SenhaHandler, EmailHandler {
+
+    var uiState by mutableStateOf(CadastroUiState())
         private set
 
     override val senha: String
@@ -33,6 +34,19 @@ class LoginViewModel : ViewModel(), SenhaHandler, EmailHandler{
         uiState = uiState.copy(senha = value)
     }
 
+    fun onNomeChange(value: String){
+        uiState = uiState.copy(
+            nome = value
+        )
+    }
 
+    fun onSenhaConfirmChange(value: String){
+        uiState = uiState.copy(
+            senhaConfirm = value
+        )
+    }
 
+    fun onOlhoConfirmChange() {
+        uiState = uiState.copy(mostrarSenhaConfirm = !uiState.mostrarSenhaConfirm)
+    }
 }

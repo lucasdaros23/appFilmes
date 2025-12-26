@@ -9,7 +9,9 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.appfilmes.R
+import com.example.appfilmes.viewModel.CadastroViewModel
 import com.example.appfilmes.viewModel.LoginViewModel
+import com.example.appfilmes.viewModel.contract.SenhaHandler
 
 
 @Composable
@@ -42,14 +44,20 @@ fun IconLock(){
 }
 
 @Composable
-fun IconEye(loginViewModel: LoginViewModel){
+fun IconEye(handler: SenhaHandler){
     IconBase(
-        painterResource(
-            if (loginViewModel.uiState.mostrarSenha) R.drawable.openeye else R.drawable.closeeye),
-        "olho"
+        painterResource(if (handler.mostrarSenha) R.drawable.openeye else R.drawable.closeeye),
+    "olho"
     )
 }
 
+@Composable
+fun IconEyeConfirm(handler: CadastroViewModel){
+    IconBase(
+        painterResource(if (handler.uiState.mostrarSenhaConfirm) R.drawable.openeye else R.drawable.closeeye),
+        "olho"
+    )
+}
 @Composable
 fun IconGoogle(){
     IconBase(

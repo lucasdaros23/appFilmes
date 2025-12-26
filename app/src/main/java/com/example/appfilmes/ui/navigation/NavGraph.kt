@@ -5,14 +5,21 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.appfilmes.ui.telas.CadastroScreen
 import com.example.appfilmes.ui.telas.LoginScreen
 import com.example.appfilmes.ui.telas.ProfileScreenView
+import com.example.appfilmes.viewModel.CadastroViewModel
 import com.example.appfilmes.viewModel.LoginViewModel
 import com.example.appfilmes.viewModel.ProfileViewModel
 import com.example.appfilmes.viewModel.RodapeViewModel
 
 @Composable
-fun NavGraph(loginViewModel: LoginViewModel, navController: NavHostController, rodapeViewModel: RodapeViewModel, profileViewModel: ProfileViewModel){
+fun NavGraph(loginViewModel: LoginViewModel,
+             cadastroViewModel: CadastroViewModel,
+             navController: NavHostController,
+             rodapeViewModel: RodapeViewModel,
+             profileViewModel: ProfileViewModel
+){
     NavHost(
         navController = navController,
         startDestination = Routes.LOGIN
@@ -25,6 +32,9 @@ fun NavGraph(loginViewModel: LoginViewModel, navController: NavHostController, r
         }
         composable(Routes.PERFIL) {
             ProfileScreenView(profileViewModel, navController, rodapeViewModel)
+        }
+        composable (Routes.CADASTRO){
+            CadastroScreen(cadastroViewModel, navController)
         }
     }
 }
