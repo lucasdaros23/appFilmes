@@ -1,5 +1,6 @@
 package com.example.appfilmes.ui.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -61,16 +62,16 @@ fun ButtonBase(
 fun ButtonSocial(
     text: String,
     onClick: () -> Unit,
-    ){
+) {
     OutlinedButton(
         onClick = onClick,
         Modifier,
         shape = RoundedCornerShape(20.dp)
-    ){
+    ) {
         Row(
             Modifier.padding(13.dp)
         ) {
-            if (text=="Google") IconGoogle() else IconFacebook()
+            if (text == "Google") IconGoogle() else IconFacebook()
             Spacer(Modifier.size(20.dp))
             Text(
                 text,
@@ -81,11 +82,29 @@ fun ButtonSocial(
 }
 
 @Composable
-fun ButtonGoogle(){
+fun ButtonGoogle() {
     ButtonSocial("Google", onClick = {})
 }
 
 @Composable
-fun ButtonFacebook(){
+fun ButtonFacebook() {
     ButtonSocial("Facebook", onClick = {})
+}
+
+
+@Composable
+fun ButtonAlert(
+    text: String,
+    onClick: () -> Unit,
+    erro: Boolean
+) {
+    Button(
+        onClick = onClick,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(if (erro) 0xFFE04C60 else 0xFF0066FF),
+            contentColor = Color.White
+        ),
+        shape = RoundedCornerShape(10.dp),
+        content = { Text(text) },
+    )
 }

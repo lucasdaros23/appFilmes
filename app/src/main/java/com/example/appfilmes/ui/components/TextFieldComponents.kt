@@ -91,7 +91,8 @@ fun TextFieldNome(viewModel: CadastroViewModel) {
         value = viewModel.uiState.nome,
         onValueChange = { viewModel.onNomeChange(it) },
         placeholder = "Seu nome",
-        visualTransformation = VisualTransformation.None
+        visualTransformation = VisualTransformation.None,
+        leadingIcon = {IconUser()}
     )
 }
 

@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.appfilmes.ui.components.AlertCriarConta
 import com.example.appfilmes.ui.components.ButtonBase
 import com.example.appfilmes.ui.components.ImageMovie
 import com.example.appfilmes.ui.components.TextBase
@@ -26,9 +27,10 @@ import com.example.appfilmes.ui.components.TextFieldSenhaConfirm
 import com.example.appfilmes.ui.components.TextMaior
 import com.example.appfilmes.ui.navigation.Routes
 import com.example.appfilmes.viewModel.CadastroViewModel
+import com.example.appfilmes.viewModel.UserViewModel
 
 @Composable
-fun CadastroScreen(handler: CadastroViewModel, navController: NavHostController) {
+fun CadastroScreen(handler: CadastroViewModel, navController: NavHostController, userViewModel: UserViewModel) {
     Row(
         horizontalArrangement = Arrangement.Center
     ) {
@@ -62,7 +64,7 @@ fun CadastroScreen(handler: CadastroViewModel, navController: NavHostController)
                 TextFieldSenhaConfirm(handler)
 
                 Row(Modifier.padding(10.dp)){
-                    ButtonBase("Criar Conta", onClick = { navController.navigate(Routes.HOME) })
+                    ButtonBase("Criar Conta", onClick = { handler.onCriarConta()})
                 }
                 Row(
                     Modifier
@@ -76,6 +78,7 @@ fun CadastroScreen(handler: CadastroViewModel, navController: NavHostController)
             }
         }
     }
+    AlertCriarConta(handler, navController, userViewModel)
 }
 
 /*

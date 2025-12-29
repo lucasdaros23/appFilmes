@@ -12,14 +12,16 @@ import com.example.appfilmes.viewModel.CadastroViewModel
 import com.example.appfilmes.viewModel.LoginViewModel
 import com.example.appfilmes.viewModel.ProfileViewModel
 import com.example.appfilmes.viewModel.RodapeViewModel
+import com.example.appfilmes.viewModel.UserViewModel
 
 @Composable
 fun NavGraph(loginViewModel: LoginViewModel,
              cadastroViewModel: CadastroViewModel,
              navController: NavHostController,
              rodapeViewModel: RodapeViewModel,
-             profileViewModel: ProfileViewModel
-){
+             profileViewModel: ProfileViewModel,
+             userViewModel: UserViewModel
+             ){
     NavHost(
         navController = navController,
         startDestination = Routes.LOGIN
@@ -34,7 +36,7 @@ fun NavGraph(loginViewModel: LoginViewModel,
             ProfileScreenView(profileViewModel, navController, rodapeViewModel)
         }
         composable (Routes.CADASTRO){
-            CadastroScreen(cadastroViewModel, navController)
+            CadastroScreen(cadastroViewModel, navController, userViewModel)
         }
     }
 }

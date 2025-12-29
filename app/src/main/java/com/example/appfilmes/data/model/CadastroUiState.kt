@@ -7,5 +7,5 @@ data class CadastroUiState(
     val senhaConfirm: String = "",
     val mostrarSenha: Boolean = false,
     val mostrarSenhaConfirm: Boolean = false,
-
+    val alertMessage: String = ""
 )

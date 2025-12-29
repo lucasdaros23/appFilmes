@@ -72,3 +72,40 @@ fun IconFacebook(){
     painterResource(R.drawable.facebook),
     "facebook")
 }
+
+@Composable
+fun IconUser(){
+    IconBase(
+        painterResource(R.drawable.user),
+        "usuário"
+    )
+}
+
+@Composable
+fun IconBaseAlert(
+    painter: Painter,
+    contentDescription: String
+) {
+    Icon(
+        painter = painter,
+        contentDescription = contentDescription,
+        Modifier.size(45.dp),
+        tint = Color(0xffffffff)
+    )
+}
+
+@Composable
+fun IconConfirm(){
+    IconBaseAlert(
+        painterResource(R.drawable.confirm),
+        contentDescription = "confirmado"
+    )
+}
+
+@Composable
+fun IconWarning(){
+    IconBaseAlert(
+        painterResource(R.drawable.aviso),
+        contentDescription = "aviso"
+    )
+}
