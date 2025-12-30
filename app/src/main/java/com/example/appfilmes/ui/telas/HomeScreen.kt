@@ -55,7 +55,7 @@ fun HomeScreen(
 
     val filmes = filmesViewModel.filmes.value
     val filmesEmAlta = filmesViewModel.filmesEmAlta.value
-x
+
     LaunchedEffect(Unit) {
         filmesViewModel.carregarFilmes()
         filmesViewModel.carregarFilmesEmAlta()
