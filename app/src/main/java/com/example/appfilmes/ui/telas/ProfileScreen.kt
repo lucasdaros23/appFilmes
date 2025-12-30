@@ -1,6 +1,5 @@
 package com.example.appfilmes.ui.telas
 
-import TopBar
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,6 +36,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.appfilmes.data.model.FilmaAvaliado
 import com.example.appfilmes.ui.containers.BottomBar
+import com.example.appfilmes.ui.containers.TopBar
 import com.example.appfilmes.viewModel.ProfileViewModel
 import com.example.appfilmes.viewModel.RodapeViewModel
 

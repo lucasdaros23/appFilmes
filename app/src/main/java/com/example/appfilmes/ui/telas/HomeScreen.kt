@@ -1,3 +1,6 @@
+package com.example.appfilmes.ui.telas
+
+import FilmeCarouselCard
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,19 +19,11 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,27 +36,33 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.appfilmes.R
-import com.example.appfilmes.ui.components.Filme
+import com.example.appfilmes.data.model.Filme
 import com.example.appfilmes.ui.components.FilmeCard
 import com.example.appfilmes.ui.containers.BottomBar
-import com.example.appfilmes.ui.navigation.Routes
+import com.example.appfilmes.ui.containers.TopBar
 import com.example.appfilmes.ui.theme.AppFilmesTheme
+import com.example.appfilmes.viewModel.FilmesViewModel
 import com.example.appfilmes.viewModel.RodapeViewModel
 
-@Composable
-fun HomeScreen(navController: NavHostController, rodapeViewModel: RodapeViewModel) {
-    val filmes = listOf(
-        Filme(
-            "A Queda do Império",
-            "Um épico histórico que narra a ascensão e queda de um poderoso império."
-        ),
-    )
 
-    val filmesEmAlta = listOf(
-        Filme("Viajantes do Tempo", "Uma jornada no tempo repleta de mistérios."),
-        Filme("Cidade Oculta", "Um futuro sombrio e cheio de segredos."),
-        Filme("A Lenda Perdida", "A busca por uma civilização perdida."),
-    )
+@Composable
+fun HomeScreen(
+    navController: NavHostController,
+    rodapeViewModel: RodapeViewModel,
+    filmesViewModel: FilmesViewModel
+) {
+
+
+    val filmes = filmesViewModel.filmes.value
+    val filmesEmAlta = filmesViewModel.filmesEmAlta.value
+x
+    LaunchedEffect(Unit) {
+        filmesViewModel.carregarFilmes()
+        filmesViewModel.carregarFilmesEmAlta()
+    }
+
+
+
 
     Column(
         modifier = Modifier
@@ -69,99 +70,66 @@ fun HomeScreen(navController: NavHostController, rodapeViewModel: RodapeViewMode
             .background(Color(0xFF000000))
     ) {
         TopBar()
+        if (filmes.isEmpty() && filmesEmAlta.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "Carregando...", color = Color.White)
 
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .padding(horizontal = 20.dp, vertical = 10.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Lista de cards principais
-            items(filmes) { filme ->
-                FilmeCard(filme)
             }
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(horizontal = 20.dp, vertical = 10.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                // Lista de cards principais
+                items(items = filmes) { filme ->
+                    FilmeCard(filme)
+                }
 
-            // Espaço entre seções
-            item { Spacer(Modifier.height(30.dp)) }
+                // Espaço entre seções
+                item { Spacer(Modifier.height(30.dp)) }
 
-            // Título "Em Alta"
-            item {
-                Text(
-                    text = "Em Alta",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.White,
-                    modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
-                )
-            }
+                // Título "Em Alta"
+                item {
+                    Text(
+                        text = "Em Alta",
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White,
+                        modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
+                    )
+                }
 
-            // Carrossel horizontal
-            item {
-                LazyRow(
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    items(filmesEmAlta) { filme ->
-                        FilmeCarouselCard(filme)
+                // Carrossel horizontal
+                item {
+                    LazyRow(
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        items(items = filmesEmAlta) { filme ->
+                            FilmeCarouselCard(filme)
+                        }
                     }
                 }
+
+                item { Spacer(Modifier.height(20.dp)) }
             }
-
-            item { Spacer(Modifier.height(20.dp)) }
         }
-
         BottomBar(navController, rodapeViewModel)
     }
 }
 
-@Composable
-fun TopBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .padding(start = 20.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Box(
-            modifier = Modifier
-                .height(50.dp)
-                .width(50.dp)
-                .clip(shape = RoundedCornerShape(15.dp))
-                .background(Color.White)
-        ) {
-            Image(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 3.dp),
-                painter = painterResource(id = R.drawable.image_removebg_preview),
-                contentDescription = "Logo"
-            )
-        }
-
-        Spacer(Modifier.width(10.dp))
-
-        Text(
-            text = "CineCritica",
-            fontSize = 19.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-
-        Spacer(Modifier.width(140.dp))
-
-        Icon(
-            imageVector = Icons.Filled.Search,
-            contentDescription = "Buscar",
-            tint = Color.White,
-            modifier = Modifier.size(28.dp)
-        )
-    }
-}
 
 
 
+/*
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview(modifier: Modifier = Modifier) {
@@ -171,3 +139,5 @@ fun HomeScreenPreview(modifier: Modifier = Modifier) {
         HomeScreen(navController, rodapeViewModel)
     }
 }
+
+ */

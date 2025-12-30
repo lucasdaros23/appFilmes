@@ -15,15 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-
-data class Filme(
-    val titulo: String,
-    val descricao: String
-)
+import com.example.appfilmes.R
+import com.example.appfilmes.data.model.Filme
+import com.example.appfilmes.ui.theme.BlackTransparente
 
 @Composable
 fun FilmeCard(filme: Filme) {
@@ -32,42 +31,63 @@ fun FilmeCard(filme: Filme) {
             .fillMaxWidth()
             .height(220.dp)
             .clip(RoundedCornerShape(12.dp))
-            .background(Color.White)
     ) {
+        ImageFromUrl(filme.Poster)
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            Text(
-                text = filme.titulo,
-                color = Color.Black,
-                fontWeight = FontWeight.Bold,
-                fontSize = 20.sp
-            )
+                .background(brush = BlackTransparente),
+            verticalArrangement = Arrangement.Bottom,
 
-            Text(
-                text = filme.descricao,
-                color = Color.Black.copy(alpha = 0.8f),
-                fontSize = 14.sp,
-                modifier = Modifier.padding(top = 4.dp, bottom = 8.dp)
-            )
-
-            Box(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color(0xFF3B49DF))
-                    .fillMaxWidth()
-                    .height(38.dp),
-                contentAlignment = Alignment.Center
             ) {
+            Column(
+                Modifier
+                    .padding(horizontal = 16.dp, vertical = 12.dp)
+
+            ) {
+
                 Text(
-                    text = "Ver Detalhes",
+                    text = filme.Title,
                     color = Color.White,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp
                 )
+
+                Text(
+                    text = filme.Year,
+                    color = Color.White.copy(alpha = 0.8f),
+                    fontSize = 14.sp,
+                    modifier = Modifier.padding(top = 4.dp, bottom = 8.dp)
+                )
+
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(Color(0xFF3B49DF))
+                        .fillMaxWidth()
+                        .height(38.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Ver Detalhes",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun FilmeCardPreview() {
+    FilmeCard(
+        Filme(
+            Title = "oiiii",
+            Year = "2024",
+            Plot = "blablabla",
+            Poster = "https://www.theguardian.com/science/2019/jun/17/how-dogs-capture-your-heart-evolution-puppy-dog-eyes"
+        )
+    )
 }

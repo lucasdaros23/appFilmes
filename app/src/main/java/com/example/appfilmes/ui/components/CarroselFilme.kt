@@ -22,7 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.appfilmes.ui.components.Filme
+import com.example.appfilmes.data.model.Filme
+import com.example.appfilmes.ui.components.ImageFromUrl
 
 @Composable
 fun FilmeCarouselCard(filme: Filme) {
@@ -35,14 +36,8 @@ fun FilmeCarouselCard(filme: Filme) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            // Tela branca onde ficaria a imagem do filme
-            Box(
-                modifier = Modifier
-                    .height(220.dp)
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(15.dp))
-                    .background(Color.White)
-            )
+
+            ImageFromUrl(filme.Poster)
 
             // Nota com ícone de estrela e título
             Column(
@@ -59,7 +54,7 @@ fun FilmeCarouselCard(filme: Filme) {
                         modifier = Modifier.size(16.dp)
                     )
                     Text(
-                        text = "4.${(1..9).random()}",
+                        text = filme.imdbRating,
                         color = Color.White,
                         modifier = Modifier.padding(start = 4.dp),
                         fontSize = 13.sp
@@ -67,7 +62,7 @@ fun FilmeCarouselCard(filme: Filme) {
                 }
 
                 Text(
-                    text = filme.titulo,
+                    text = filme.Title,
                     fontWeight = FontWeight.Bold,
                     fontSize = 15.sp,
                     color = Color.White,
